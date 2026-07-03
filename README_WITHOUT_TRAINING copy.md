@@ -8,13 +8,13 @@ Este repositório contém um guia de como retreinar o modelo [SPABERT](https://g
 
 ## 2. Criação e Ativação do Ambiente Virtual Python
 
-- Com o miniconda instalado, execute o comando abaixo para criar um ambiente python de nome `spabert_venv`
+- Com o miniconda instalado, execute o comando abaixo para criar um ambiente python de nome `spabert_reprodution_venv`
   ```bash
-  conda  create  -n  spabert_venv  python=3.11
+  conda  create  -n  spabert_reprodution_venv  python=3.11
   ```
 - Agora ative o ambiente criado com o seguinte comando
   ```bash
-  conda  activate  spabert_venv
+  conda  activate  spabert_reprodution_venv
   ```
 
 ## 3. Clonando Repositório do SPABERT e Instalando Dependências
@@ -45,28 +45,6 @@ Este repositório contém um guia de como retreinar o modelo [SPABERT](https://g
   from  pathlib  import  Path
   ```
 
-### 4.2 Inserindo Dados Faltantes Para Pré-Treinamento
-
-- Dentro da pasta do projeto, crie a pasta `data` e dentro dela crie a pasta `sql_output`
-  ```bash
-  mkdir -p data/sql_ouput
-  ```
-- Agora baixe o arquivo `osm-point-london.json` que está disponível neste [link](https://drive.google.com/file/d/1r2LZNw4dmNELyHD2y5PwQUjSRxRVouNk/view?usp=drive_link) e coloque ele dentro da pasta `sql_output`
-- Repita o mesmo processo para o arquivo `osm-point-california.json` disponível neste [link](https://drive.google.com/file/d/1QAehOXbLaHQru2wykWNjMpX1XUC2Oced/view?usp=drive_link)
-
-### 4.3 Corrigindo Dirtetórios dos Arquivos de Treinamento
-
-- No arquivo `train_mlm.py` troque o trecho abaixo
-  ```python
-  london_file_path = '../data/sql_output/osm-point-london.json'
-  california_file_path = '../data/sql_output/osm-point-california.json'
-  ```
-  por esse:
-  ```python
-  london_file_path = '  data/sql_output/osm-point-london.json'
-  california_file_path = '  data/sql_output/osm-point-california.json'
-  ```
-
 ## 5. Obtendo o Spabert Base e Large
 
 - Dentro da pasta `models`, crie as pastas `pretrained-base` e `pretrained-large` que vão guardar os modelos pré-treinados.
@@ -74,20 +52,6 @@ Este repositório contém um guia de como retreinar o modelo [SPABERT](https://g
 ### 5.1 Baixando Modelos já Pré-Treinados
 
 - Caso prefira já baixar os modelos pré-treinados e não executar os treinamentos, você baixar diretamente o modelo [base](https://drive.google.com/file/d/1l44FY3DtDxzM_YVh3RR6PJwKnl80IYWB/view) e [large](https://drive.google.com/file/d/1LeZayTR92R5bu9gH_cGCwef7nnMX35cR/view) e salver eles nas suas respectivas pastas
-
-### 5.2 Pré-Treinando Modelos (Opcional)
-
-- Para executar o pré-treinamento do Spabert Base execute o comando
-
-  ```bash
-  python3 train_mlm.py --lr=5e-5 --sep_between_neighbors --bert_option='bert-base' --model_save_dir='models/pretrained-base'
-  ```
-
-- Já para executar o pré-treinamento do Spabert Large, execute o comando
-  ```bash
-   python3 train_mlm.py --lr=1e-6 --sep_between_neighbors --bert_option='bert-large
-  --model_save_dir='models/pretrained-large'
-  ```
 
 ## 6. Obtendo Modelos Treinados com Dados de Londres e California
 
