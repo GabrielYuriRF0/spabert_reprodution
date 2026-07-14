@@ -1,5 +1,1 @@
-/data/spabert_models/spabert_base.pth
-/data/spabert_models/spabert_large.pth
-/data/test_data/osm-point-california-typing.json
-/data/test_data/osm-point-london-typing.json
 src/__pycache__*
