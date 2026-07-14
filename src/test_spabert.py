@@ -2,12 +2,13 @@ import os
 import sys
 from transformers import BertTokenizer
 from tqdm import tqdm  # for our progress bar
+from save_results import save_results_to_csv
 
 import torch
 from torch.utils.data import DataLoader
 import torch.nn.functional as F
 
-sys.path.append("../../../")
+sys.path.append("../")
 from models.spabert_model import SpatialBertConfig
 from models.spabert_model import (
     SpatialBertForSemanticTyping,
@@ -188,15 +189,37 @@ def testing(args):
         np.argmax(np.array(pred_list), axis=1),
         average="micro",
     )
+    class_names = label_encoder.classes_
+
     print("precisions:\n", ["{:.3f}".format(prec) for prec in precisions])
     print("recalls:\n", ["{:.3f}".format(rec) for rec in recalls])
     print("fscores:\n", ["{:.3f}".format(f1) for f1 in fscores])
     print("supports:\n", supports)
+
+    # NOVO: imprime uma tabela associando cada classe às suas métricas
+    print("\nmétricas por classe:")
+    header = "{:<30} {:>10} {:>10} {:>10} {:>10}".format(
+        "classe", "precision", "recall", "f1", "support"
+    )
+    print(header)
+    print("-" * len(header))
+    for name, prec, rec, f1_score, support in zip(
+        class_names, precisions, recalls, fscores, supports
+    ):
+        print(
+            "{:<30} {:>10.3f} {:>10.3f} {:>10.3f} {:>10d}".format(
+                name, prec, rec, f1_score, int(support)
+            )
+        )
+
     print(
         "micro P, micro R, micro F1",
         "{:.3f}".format(precision),
         "{:.3f}".format(recall),
         "{:.3f}".format(f1),
+    )
+    save_results_to_csv(
+        args, precisions, recalls, fscores, supports, precision, recall, f1
     )
 
 
