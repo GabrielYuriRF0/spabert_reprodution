@@ -1,6 +1,6 @@
 # Passo a passo para a reprodução
 
-Este repositório contém um guia de como retreinar o modelo [SPABERT](https://github.com/knowledge-computing/spabert/tree/main) em suas duas variantes (**base** e **large**) e avaliar ele na tarefa de **Tipagem Não Supervionada de Geoentidades**.
+Este repositório contém um guia de como avaliar o [SPABERT](https://github.com/knowledge-computing/spabert/tree/main) na tarefa de **Tipagem Não Supervionada de Geoentidades** .
 
 # 1. Instalação do Miniconda
 
@@ -53,4 +53,5 @@ python3 test_spabert.py --bert_option='bert-base' --checkpoint_path='../data/spa
 ```bash
 python3 test_spabert.py --bert_option='bert-large' --checkpoint_path='../data/spabert_models/spabert_large.pth' --with_type --sep --num_classes=9 --sep_between_neighbors
 ```
+
 - Após a execução dos scripts de avaliação, os resultados vão estar dentro da pasta `data/results`
