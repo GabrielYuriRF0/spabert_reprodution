@@ -40,7 +40,7 @@ Este repositório contém um guia de como avaliar o [SPABERT](https://github.com
 
 ## 6.1 Avaliando Spabert Base
 
-- Para avaliar o `Spabert Base` vamos executar o seguinte comando:
+- Para avaliar o `Spabert Base` vamos executar o seguinte comando dentro da pasta `src`:
 
 ```bash
 python3 test_spabert.py --bert_option='bert-base' --checkpoint_path='../data/spabert_models/spabert_base.pth' --with_type --sep --num_classes=9 --sep_between_neighbors
@@ -54,4 +54,4 @@ python3 test_spabert.py --bert_option='bert-base' --checkpoint_path='../data/spa
 python3 test_spabert.py --bert_option='bert-large' --checkpoint_path='../data/spabert_models/spabert_large.pth' --with_type --sep --num_classes=9 --sep_between_neighbors
 ```
 
-- Após a execução dos scripts de avaliação, os resultados vão estar dentro da pasta `data/results`
+- Após a execução dos scripts de avaliação, os resultados vão estar dentro da pasta `data/results`.
